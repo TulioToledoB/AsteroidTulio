@@ -6,24 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance; // Una instancia estática para permitir un fácil acceso desde otros scripts.
+    public static GameManager instance; 
     public int currentScore;
     public int bestScore;
-    public Image[] livesImages; // Referencias a los objetos de imagen que representan las vidas en la UI.
-    public int livesRemaining; // La cantidad actual de vidas restantes.
-    public TextMeshProUGUI score; // Referencia al texto de la UI para el puntaje actual
-    public TextMeshProUGUI bestScoreText;    // Referencia al texto de la UI para el mejor puntaje
+    public Image[] livesImages;
+    public int livesRemaining; 
+    public TextMeshProUGUI score; 
+    public TextMeshProUGUI bestScoreText;    
     public GameObject gameOver;
     public GameObject gameElements;
 
 
 private void Awake()
     {
-        // Configura el GameManager como un Singleton.
+        
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Opcional: para persistir entre escenas.
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
