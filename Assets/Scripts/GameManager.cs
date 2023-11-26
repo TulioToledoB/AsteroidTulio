@@ -36,12 +36,12 @@ private void Awake()
 
     private void Start()
     {
-        livesRemaining = livesImages.Length; // Inicializa con el número total de vidas.
-        UpdateLivesDisplay(); // Actualiza la UI de vidas al comenzar.
-        // Obtén el mejor puntaje de PlayerPrefs o inicia con 0 si no existe.
+        livesRemaining = livesImages.Length; 
+        UpdateLivesDisplay(); 
+        
         bestScore = PlayerPrefs.GetInt("BestScore", 0);
-        currentScore = 0; // Inicia el puntaje actual en 0 para una nueva partida.
-        UpdateScoreUI();  // Actualiza la UI con los puntajes al iniciar.
+        currentScore = 0; 
+        UpdateScoreUI();  
         gameOver.SetActive(false);
         gameElements.SetActive(true);
     }
@@ -58,7 +58,7 @@ private void Awake()
         
     }
 
-    // Método para llamar cuando el jugador pierde una vida.
+   
     public void LoseLife()
     {
         if (livesRemaining > 0)
@@ -70,14 +70,14 @@ private void Awake()
             {
                  if (livesRemaining == 0)
             {
-                // Manejo del game over:
+               
                     HandleGameOver();
             }
             }
         }
     }
 
-    // Actualiza la representación visual de las vidas.
+  
     private void UpdateLivesDisplay()
     {
         for (int i = 0; i < livesImages.Length; i++)
@@ -94,7 +94,7 @@ private void Awake()
             if (currentScore > bestScore) {
                 bestScore = currentScore;
                 PlayerPrefs.SetInt("BestScore", bestScore);
-                // Actualiza la UI del mejor puntaje si es necesario.
+               
             }
     }
     public void AddScore(int scoreToAdd) {
@@ -105,9 +105,9 @@ private void Awake()
 
 private void HandleGameOver()
 {
-    // Aquí manejarías el game over, como mostrar un panel de game over y actualizar el mejor puntaje si es necesario.
+    
     CheckForBestScore();
-    // Opcional: Pausa el juego o muestra un botón para reiniciar.
+  
     gameOver.SetActive(true);
     gameElements.SetActive(false);
 }    

@@ -1,15 +1,15 @@
 using UnityEngine;
 
 public class Asteroid : MonoBehaviour {
-    public GameObject subRockPrefab; // Prefab para los asteroides más pequeños
-    public int rockSize; // Tamaño del asteroide
-    public int pointsValue; // Puntos otorgados por el asteroide
-    public float thrustForce = 2f; // Fuerza aplicada al movimiento
-    public Transform rocksContainer; // Contenedor para los asteroides instanciados
+    public GameObject subRockPrefab; 
+    public int rockSize; 
+    public int pointsValue; 
+    public float thrustForce = 2f;
+    public Transform rocksContainer; 
     public float lifeTime = 20f;
     private Rigidbody2D rockRb;
-    public AudioClip collisionSound; // Clip de sonido para la colisión
-    private AudioSource audioSource; // Fuente de audio
+    public AudioClip collisionSound;
+    private AudioSource audioSource; 
 
     public void Start(){
         Destroy(gameObject, lifeTime);
@@ -18,15 +18,15 @@ public class Asteroid : MonoBehaviour {
 
     private void Awake() {
          audioSource =GetComponent<AudioSource>();
-        // Inicializa el componente Rigidbody2D
+        
         rockRb = GetComponent<Rigidbody2D>();
-        // Calcula dirección hacia el jugador y aplica fuerza
+        
         SeekPlayer();
 
     }
 
     private void SeekPlayer() {
-        // Busca al jugador y calcula la dirección
+        
         Player targetPlayer = FindObjectOfType<Player>();
         if (targetPlayer != null) {
             Vector2 targetDirection = (targetPlayer.transform.position - transform.position).normalized;
@@ -35,13 +35,13 @@ public class Asteroid : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D impact) {
-        if (impact.gameObject.CompareTag("Projectile")) { // Verifica el impacto con un proyectil
+        if (impact.gameObject.CompareTag("Projectile")) { 
             HandleCollisionWithProjectile(impact);
         }
     }
 
     private void HandleCollisionWithProjectile(Collision2D impact) {
-        // Suma puntos y destruye el asteroide y la bala
+       
         GameManager.instance.AddScore(pointsValue);
         Destroy(impact.gameObject);
 
@@ -63,7 +63,7 @@ public class Asteroid : MonoBehaviour {
     
 
     private void FragmentRock() {
-        // Crea dos fragmentos de asteroide y les aplica fuerza
+        
         var fragmentOne = CreateRockFragment();
         var fragmentTwo = CreateRockFragment();
         ApplyForceToFragment(fragmentOne);
@@ -71,12 +71,12 @@ public class Asteroid : MonoBehaviour {
     }
 
     private GameObject CreateRockFragment() {
-        // Instancia un fragmento de asteroide
+        
         return Instantiate(subRockPrefab, transform.position, Quaternion.Euler(0, 0, Random.Range(0f, 360f)), rocksContainer);
     }
 
     private void ApplyForceToFragment(GameObject fragment) {
-        // Aplica una fuerza aleatoria al fragmento de asteroide
+        
         Vector2 randomForce = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
         Rigidbody2D fragmentRb = fragment.GetComponent<Rigidbody2D>();
         fragmentRb.AddForce(randomForce * thrustForce, ForceMode2D.Impulse);

@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
 {
-    // Asegúrate de reiniciar el estado aquí si el GameManager ya existe.
+    
     if (GameManager.instance != null)
     {
         GameManager.instance.Restart();

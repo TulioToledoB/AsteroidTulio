@@ -12,14 +12,14 @@ public class Player : MonoBehaviour
     public float turnDirection = 0.0f;
     private bool thrusting = false;
     public Rigidbody2D rb;
-    public AudioClip engineSound; // Clip de sonido para el motor
-    private AudioSource engineAudioSource; // Fuente de audio para el motor
+    public AudioClip engineSound; 
+    private AudioSource engineAudioSource; 
 
     void Start()
     {
         engineAudioSource = gameObject.AddComponent<AudioSource>();
         engineAudioSource.clip = engineSound;
-        engineAudioSource.loop = true; // Hace que el sonido se repita
+        engineAudioSource.loop = true; 
         engineAudioSource.playOnAwake = false;
     }
 
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         }
         Teleport();   
 
-        // Reproduce el sonido del motor cuando la nave se mueve
+        
         if (thrusting || turnDirection != 0)
         {
             if (!engineAudioSource.isPlaying)
@@ -84,10 +84,10 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Asteroid")) // Asegúrate de que el tag de tu asteroide es "Asteroid"
+        if (collision.gameObject.CompareTag("Asteroid")) 
         {
             GameManager.instance.LoseLife();
-            // Opcional: Agregar lógica adicional como una breve invulnerabilidad, efectos visuales, etc.
+           
         }
     }
 
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         var viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
         bool isTeleported = false;
 
-        // Verificar límites horizontales y ajustar la posición X
+       
         if (viewportPosition.x > 1)
         {
             viewportPosition.x = 0;
@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
             isTeleported = true;
         }
 
-        // Verificar límites verticales y ajustar la posición Y
+        
         if (viewportPosition.y > 1)
         {
             viewportPosition.y = 0;
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
             isTeleported = true;
         }
 
-        // Si el jugador fue teletransportado, actualizamos su posición en el mundo
+        
         if (isTeleported)
         {
             transform.position = Camera.main.ViewportToWorldPoint(viewportPosition);
